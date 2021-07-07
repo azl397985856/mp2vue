@@ -1,5 +1,98 @@
 # mp2vue
 
+## 概述
+
+将完成的小程序（比如微信小程序）转为基于 vue 的自研小程序。
+
+ 
+| 微信                                                 | vue                        |
+|------------------------------------------------------|----------------------------|
+| js | main.js |
+| wcss,wxml | render.js                       |
+| - | worker.js                  |
+| - | render.js           |
+| - | index.html           |
+
+### main.js
+
+```js
+
+__init({
+  // App
+
+  app() {
+    // app.js 及其引用被打包后的结果
+  },
+
+  // 页面
+
+  pages: {
+    "/pages/log/log": function () {
+      // log.js 及其引用被打包后的结果
+    },
+    "/pages/index/index": function () {
+      // index.js 及其引用被打包后的结果
+    },
+  },
+
+  // 自定义组件
+
+  components: {
+    "/components/userList/index": function () {
+      // userList/index.js 及其引用被打包后的结果
+    },
+  },
+});
+```
+
+### render.js
+
+```js
+
+import "./main.css";
+
+import c0 from "./pages/log/log.vue";
+
+import c1 from "./pages/index/index.vue";
+
+const pages = {
+  "/pages/log/log": c0,
+  "/pages/index/index": c1,
+};
+
+// 通过 template.html 中的 script src 获取当前页面路径
+
+const path = getCurrentPagePath();
+
+__init(pages[path]);
+```
+
+### xxx.vue
+
+```xml
+<template>
+  <!-- log.wxml 被转换成了 Vue 模板 -->
+</template>
+
+<style>
+
+
+  <!-- log.wcss 作为 Vue 组件的样式被插入到了这里 -->
+</style>
+
+<script>
+  // 这部分代码将由编译器生成，为渲染层提供一个最最基础的 Vue 组件
+  export default {
+    pathKey: '/pages/log/log',
+    // 注入路径信息
+    components: {
+      // ...注入该组件依赖的组件
+    }
+  }
+</script>
+```
+
+
 ## template
 
 ### 组件&属性
@@ -48,7 +141,7 @@ after:
 
 | 微信                                                 | vue                        |
 |------------------------------------------------------|----------------------------|
-| wx:for="{{array}}" wx:for-item="item"wx:for-index="i | v-for="(item, i) in array" |
+| wx:for="{{array}}" wx:for-item="item"wx:for-index="i" | v-for="(item, i) in array" |
 | wx:if                                                | v-if                       |
 | wx:elif                                              | v-else-if                  |
 |                        wx:else                       |           v-else           |
@@ -85,4 +178,8 @@ vm = new Vue({
   }
 });
 ```
+
+## reference
+
+- [知乎小程序架构](https://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&mid=2651242645&idx=1&sn=b63c8d4ac1a1534c153ed49699fcb64c&chksm=bd4919118a3e900725c2d93816ef86bc4c86f6363c64750932c596fe5507b232ef17a882dd09&scene=27#wechat_redirect)
 
