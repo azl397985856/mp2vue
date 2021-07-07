@@ -92,6 +92,34 @@ __init(pages[path]);
 </script>
 ```
 
+### index.html
+
+```html
+<!DOCTYPE html>
+ <html lang="en">
+   <head>
+     <meta charset="UTF-8" />
+
+     <meta
+       name="viewport"
+       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+     />
+   </head>
+
+   <body>
+     <div id="app"></div>
+
+     <!-- 渲染层的基础库 -->
+
+     <script src="render.js"></script>
+
+     <!-- 所有模板和样式的合并文件 -->
+
+     <script src="main.js?page=pagePath"></script>
+   </body>
+ </html>
+```
+
 
 ## template
 
