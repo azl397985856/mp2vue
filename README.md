@@ -297,6 +297,13 @@ vm = new Vue({
 });
 ```
 
+## runtime
+
+上面几乎都是编译时，下面的是运行时。包括：
+
+- runtime-render 渲染进程的 runtime
+- runtime-worker worker 进程的 runtime
+
 ## reference
 
 - [知乎小程序架构](https://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&mid=2651242645&idx=1&sn=b63c8d4ac1a1534c153ed49699fcb64c&chksm=bd4919118a3e900725c2d93816ef86bc4c86f6363c64750932c596fe5507b232ef17a882dd09&scene=27#wechat_redirect)
