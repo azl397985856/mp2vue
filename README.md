@@ -129,15 +129,15 @@ __init(pages[path]);
 
 ```js
 import {
-  baseParse as parse,
+  parse,
   transform,
-  CompilerOptions,
   generate
 } from '@vue/compiler-core'
 
 1. parse
 
 const ast = parse("'<input v-model="model" />'")
+// 2. transform
  transform(ast, {
    nodeTransforms: [transformElement],
    directiveTransforms: {
@@ -145,7 +145,6 @@ const ast = parse("'<input v-model="model" />'")
    },
    ...options
  })
-// 2. transform
 // 3. generate
 generate(ast).code
 
