@@ -128,6 +128,31 @@ __init(pages[path]);
 ### how to use ?
 
 ```js
+import {
+  baseParse as parse,
+  transform,
+  CompilerOptions,
+  generate
+} from '@vue/compiler-core'
+
+1. parse
+
+const ast = parse("'<input v-model="model" />'")
+ transform(ast, {
+   nodeTransforms: [transformElement],
+   directiveTransforms: {
+     model: transformModel
+   },
+   ...options
+ })
+// 2. transform
+// 3. generate
+generate(ast).code
+
+
+
+// parse 详细过程，用于 debug
+
 // https://github.com/vuejs/vue-next/blob/master/packages/template-explorer/src/index.ts
 import { compile } from '@vue/compiler-dom'
 import { compile as ssrCompile } from '@vue/compiler-ssr'
