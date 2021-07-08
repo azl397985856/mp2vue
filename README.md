@@ -123,6 +123,72 @@ __init(pages[path]);
 
 ## template
 
+### vue3 compiler
+
+### how to use ?
+
+```js
+// https://github.com/vuejs/vue-next/blob/master/packages/template-explorer/src/index.ts
+import { compile } from '@vue/compiler-dom'
+import { compile as ssrCompile } from '@vue/compiler-ssr'
+let lastSuccessfulCode: string
+let lastSuccessfulMap: SourceMapConsumer | undefined = undefined
+function compileCode(source: string): string {
+    console.clear()
+    try {
+      const errors: CompilerError[] = []
+      const compileFn = ssrMode.value ? ssrCompile : compile
+      
+      const { code, ast, map } = compileFn(source, {
+        filename: 'ExampleTemplate.vue',
+        ...compilerOptions,
+        sourceMap: true,
+        onError: err => {
+          errors.push(err)
+        }
+      })
+    } catch (e) {
+      lastSuccessfulCode = `/* ERROR: ${
+        e.message
+      } (see console for more info) */`
+      console.error(e)
+    }
+    return lastSuccessfulCode
+  }
+ ```
+
+
+
+options: 
+
+```js
+// https://github.com/vuejs/vue-next/blob/master/packages/template-explorer/src/options.ts
+{
+  mode: 'module',
+  filename: 'Foo.vue',
+  prefixIdentifiers: false,
+  hoistStatic: false,
+  cacheHandlers: false,
+  scopeId: null,
+  inline: false,
+  ssrCssVars: `{ color }`,
+  compatConfig: { MODE: 3 },
+  whitespace: 'condense',
+  bindingMetadata: {
+    TestComponent: BindingTypes.SETUP_CONST,
+    setupRef: BindingTypes.SETUP_REF,
+    setupConst: BindingTypes.SETUP_CONST,
+    setupLet: BindingTypes.SETUP_LET,
+    setupMaybeRef: BindingTypes.SETUP_MAYBE_REF,
+    setupProp: BindingTypes.PROPS,
+    vMySetupDir: BindingTypes.SETUP_CONST
+  }
+}
+```
+
+
+try it online : 
+
 ### 组件&属性
 
 before:
