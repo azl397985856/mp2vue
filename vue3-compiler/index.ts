@@ -9,6 +9,7 @@ import {
   transformBind,
   TemplateChildNode,
 } from "@vue/compiler-core";
+import template from "../vue2-compiler/index";
 
 const transformations = [
   transformElement,
@@ -34,7 +35,7 @@ function compile(template: string) {
   });
   return generate(ast);
 }
-const template = `<view  @click="handleClick">click me</view>`;
+// const template = `<view  @click="handleClick">click me</view>`;
 const { ast, code } = compile(template);
 
 console.log(code);

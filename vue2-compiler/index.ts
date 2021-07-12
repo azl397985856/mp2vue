@@ -9,13 +9,7 @@ ast.attrs = [{ name: "@click", value: '"handleClick"' }];
 // console.log(generate(ast, {}));
 class NewTemplateTransform extends TemplateTransform {}
 
-// get an instance
 const newTemplateTranformer = new NewTemplateTransform({
-  // some options
   prefix: "foo",
 });
-console.log(newTemplateTranformer);
-// inject the origin vue template ast and call generate method of transformer instance to get the transformed template
-const ans = newTemplateTranformer.generate(ast);
-
-console.log(ans);
+export default newTemplateTranformer.generate(ast).code;
